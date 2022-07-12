@@ -26,7 +26,7 @@ const StyledFileName = styled.span`
     margin-bottom: 1rem;
 `;
 
-export default function ImageUploader({ onFileSelectSuccess, onFileSelectError }) {
+export default function FileUploader({ onFileSelectSuccess, onFileSelectError }) {
 
     const supportedFiles = ['application/pdf','image/png','image/jpeg'];
     const supportedFileEnds = supportedFiles.map(file => file.split('/')[1]).join(', ');
@@ -50,7 +50,7 @@ export default function ImageUploader({ onFileSelectSuccess, onFileSelectError }
 
             <StyledFileUploader>
                 <input style={{display: "none"}} type="file" onChange={handleFileInput} accept={supportedFiles.join(",")}/>
-                Choose File
+                Scan QR Code From File
             </StyledFileUploader>
         </div>
     );
