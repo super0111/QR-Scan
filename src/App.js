@@ -4,7 +4,7 @@ import './App.css';
 
 import ScanCanvasQR from 'react-pdf-image-qr-scanner';
 import ImageUploader from "./components/FileUploader";
-// import CarmeraScan from "./components/carmeraScan";
+import CameraScan from "./components/CameraScan";
 
 function App() {
 	const canvasScannerRef = useRef();
@@ -36,14 +36,21 @@ function App() {
 					QR Scanner
 				</header>
 				<ScanCanvasQR ref={canvasScannerRef}/>
-					<ImageUploader 
-						onFileSelectError={(err) => { 
-							console.log(err);
-							setResultText(err.error) 
-						}} 
-						onFileSelectSuccess={(file)=>{scanFile(file)}} 
-					/>
-					<span style={{height: "40vh", width: "50vw", fontSize: "1.5rem", overflowWrap: "anywhere", overflow: "auto", border: "white solid 1px"}}>{resultText}</span>
+				<div className='qr-reader-body'>
+					<div className='qr-reader-body-image-uploader' style={{ padding: '12px' }}>
+						<ImageUploader 
+							onFileSelectError={(err) => { 
+								console.log(err);
+								setResultText(err.error) 
+							}} 
+							onFileSelectSuccess={(file)=>{scanFile(file)}}
+							style={{ padding: '12px' }}
+						/>
+					</div>
+					<div style={{height: "200px", width: "50vw", fontSize: "1.5rem", overflowWrap: "anywhere", overflow: "auto", border: "white solid 1px"}}>{resultText}</div>
+				</div>
+				<CameraScan videoId={`video-container`}/>
+				<div id='video-container' style={{ width: '200px', height: '200px', border: '1px solid red' }}></div>
 			</div>
 		</>
 	);
