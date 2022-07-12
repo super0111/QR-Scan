@@ -10,7 +10,7 @@ import { Container, Tab, TabContent } from './components/Styled'
 
 const QRScanner =() => {
   
-  const [ index, setIndex ] = useState(1)
+  const [ index, setIndex ] = useState(0)
 	const canvasScannerRef = useRef();
 
 	const [resultText, setResultText] = useState("");
