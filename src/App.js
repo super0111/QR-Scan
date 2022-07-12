@@ -50,7 +50,6 @@ function App() {
 					<div style={{height: "200px", width: "50vw", fontSize: "1.5rem", overflowWrap: "anywhere", overflow: "auto", border: "white solid 1px"}}>{resultText}</div>
 				</div>
 				<CameraScan videoId={`video-container`}/>
-				<div id='video-container' style={{ width: '200px', height: '200px', border: '1px solid red' }}></div>
 			</div>
 		</>
 	);
