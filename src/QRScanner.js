@@ -1,18 +1,13 @@
 import React, { useState, useRef } from 'react';
-
-
 import ScanCanvasQR from 'react-pdf-image-qr-scanner';
 import FileUploader from "./components/FileUploader";
 import CameraScan from "./components/CameraScan";
-
-
 import { Container, Tab, TabContent } from './components/Styled'
 
 const QRScanner =() => {
   
   const [ index, setIndex ] = useState(0)
 	const canvasScannerRef = useRef();
-
 	const [resultText, setResultText] = useState("");
 
 	async function scanFile(selectedFile) {
