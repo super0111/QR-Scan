@@ -12,18 +12,21 @@ const previewStyle = {
 const CameraScan = (props) => {
   const [data, setData] = useState('No result');
 
+  
+  const handleResult = (result, error) => {
+
+    if (!!result) {
+      setData(result?.text);
+    }
+
+    if (!!error) {
+      console.info(error);
+    }
+  }
   return (
     <div className='camera-scanner'>
       <QrReader
-        onResult={(result, error) => {
-          if (!!result) {
-            setData(result?.text);
-          }
-
-          if (!!error) {
-            console.info(error);
-          }
-        }}
+        onResult={handleResult}
         
 			  style={previewStyle}
         delay={500}
