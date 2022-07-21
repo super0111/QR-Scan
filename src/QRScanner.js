@@ -3,26 +3,33 @@ import React, { useState, useRef, useEffect } from 'react';
 import ScanCanvasQR from 'react-pdf-image-qr-scanner';
 import FileUploader from "./components/FileUploader";
 import CameraScan from "./components/CameraScan";
-import { Container, Tab, TabContent } from './components/Styled'
+import { Container, Tab, TabContent } from './components/Styled';
+import { postInfo } from "./api/post";
 
 const QRScanner =() => {
   
   const [ index, setIndex ] = useState(0)
   const [ results, setResults ] = useState([])
 	const canvasScannerRef = useRef();
-	const [resultText, setResultText] = useState("");
+  const [resultText, setResultText] = useState("");
+  
+  const [ flightNum, setFlightNum ] = useState();
+  const [ firstName, setFirstName ] = useState("");
+  const [ lastName, setLastName ] = useState("");
+  const [ seatNum, setSeatNum ] = useState();
+  const [ from, setFrom ] = useState("");
+  const [ to, setTo ] = useState();
 
-  useEffect(() => {
-    console.log(results)
-  }, [results])
 	async function scanFile(selectedFile) {
 		setResultText("");
 		try {
 			const qrCode = await canvasScannerRef.current.scanFile(selectedFile);
       
 			setResultText(qrCode || "No QR code found");
-      // console.log(qrCode)
       if (qrCode) setResults([...results, qrCode])
+      results.map((result, i) =>(
+        setFirstName(result)
+      ))
 		} catch (e) {
 
 			if (e?.name==="InvalidPDFException") {
@@ -34,7 +41,19 @@ const QRScanner =() => {
 				setResultText("Unknown error");
 			}
 		}
-	}
+  }
+  
+  // const handlePost = () => {
+  //   const formData = {
+  //     flightNum,
+  //     firstName,
+  //     lastName,
+  //     seatNum,
+  //     from,
+  //     to,
+  //   }
+  //   postInfo(formData)
+  // }
 
   return (
     <Container>
@@ -73,13 +92,12 @@ const QRScanner =() => {
                     results.map((result, key) => {
                       const items = result.split(' ')
                       
-                      console.log(items)
                       return (
                         <tr key={key}>
                           <td>{items[0].split('/')[0].slice(2)}</td>
                           <td>{items[0].split('/')[1]}</td>
                           <td>{items[7]}</td>
-                          <td>{items[8]}</td>
+                          <td>{items[8].slice(5, 8)}</td>
                           <td>{items[6].slice(0, 3)}</td>
                           <td>{items[6].slice(3, 6)}</td>
                         </tr>
@@ -88,7 +106,12 @@ const QRScanner =() => {
                     }
                 </tbody>
               </table>
-                    
+              {/* <button
+                className="post_btn"
+                onClick={handlePost}
+              >
+                Post
+              </button>  */}
             </div>
           </div>
         </TabContent>

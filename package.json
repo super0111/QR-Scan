@@ -15,7 +15,7 @@
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.2.0",
     "react-pdf-image-qr-scanner": "^1.1.1",
-    "react-qr-reader": "^3.0.0-beta-1",
+    "react-qr-reader": "^2.2.1",
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.0.5",
     "styled-components": "^5.3.3",

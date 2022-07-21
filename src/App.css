@@ -8,6 +8,20 @@
   justify-content: center;
   color: white;
 }
+.camera_scan {
+  text-align: center;
+  background-color: #282c34;
+  display: flex;  
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.dflex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .App-header {
   font-size: calc(10px + 2vmin);
@@ -16,7 +30,7 @@
 
 #video-container {
   height: 240px !important;
-  width: 320px !important;
+  width: 800px !important;
   position: static !important;
   border: 1px solid white !important;
 }
@@ -27,6 +41,8 @@
 }
 .camera-scanner {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .camera-scanner div {
   padding: 12px !important;
@@ -41,4 +57,11 @@ table {
 table th, td {
   text-transform: capitalize;
   border: 1px solid white;
+}
+.post_btn {
+  padding: 3px 10px;
+  font-size: 14px;
+  margin-top: 25px;
+  width: 70px;
+  cursor: pointer;
 }

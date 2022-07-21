@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   margin: auto;
   margin-top: 120px;
-  width: 60%;
+  width: 77%;
   height: 300px;
 `
 export const Tab = styled.div`
