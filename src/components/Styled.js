@@ -3,8 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   margin: auto;
   margin-top: 120px;
-  width: 77%;
-  height: 300px;
+  width: 85%;
 `
 export const Tab = styled.div`
   // border : 1px solid #282c34;

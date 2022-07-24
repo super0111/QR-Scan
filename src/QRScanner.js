@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-
+import React, { useState, useRef } from 'react';
+import { Table } from "react-bootstrap";
 import ScanCanvasQR from 'react-pdf-image-qr-scanner';
 import FileUploader from "./components/FileUploader";
 import CameraScan from "./components/CameraScan";
@@ -12,6 +12,7 @@ const QRScanner =() => {
   const [ results, setResults ] = useState([])
 	const canvasScannerRef = useRef();
   const [resultText, setResultText] = useState("");
+  const [noResult, setNoResult] = useState(false);
   
   const [ flightNum, setFlightNum ] = useState();
   const [ firstName, setFirstName ] = useState("");
@@ -24,7 +25,10 @@ const QRScanner =() => {
 		setResultText("");
 		try {
 			const qrCode = await canvasScannerRef.current.scanFile(selectedFile);
-      
+      console.log("qrCodeqrCodeqrCode", qrCode)
+      if(qrCode === null) {
+        setNoResult(true)
+      }
 			setResultText(qrCode || "No QR code found");
       if (qrCode) setResults([...results, qrCode])
       results.map((result, i) =>(
@@ -76,7 +80,7 @@ const QRScanner =() => {
               />
             </div>
             <div className='qr-reader-body-result'>
-              <table>
+              <Table responsive hover>
                 <thead>
                   <tr>
                     <th>first name</th>
@@ -90,22 +94,36 @@ const QRScanner =() => {
                 <tbody>
                   {
                     results.map((result, key) => {
-                      const items = result.split(' ')
-                      
+                      console.log("resultttt", result.includes(' '))
+                      const _result = result.replace(/  +/g, ' ');
+                      const items = _result.split(' ');
                       return (
+                        result.includes(' ') === false ?
+                        <tr style={{textAlign: "center"}}>
+                          {result}
+                        </tr> :
                         <tr key={key}>
                           <td>{items[0].split('/')[0].slice(2)}</td>
                           <td>{items[0].split('/')[1]}</td>
-                          <td>{items[7]}</td>
-                          <td>{items[8].slice(5, 8)}</td>
-                          <td>{items[6].slice(0, 3)}</td>
-                          <td>{items[6].slice(3, 6)}</td>
+                          { items[1] == "M" ?
+                            <td>{items[3].slice(-2)}{items[4]}</td> :
+                            <td>{items[2].slice(-2)}{items[3]}</td>
+                          } 
+                          { items[1] == "M" ?
+                            <td>{items[5].slice(5, 8)}</td> :
+                            <td>{items[4].slice(5, 8)}</td>
+                          }
+                          <td>{items[2].slice(0, 3)}</td>
+                          <td>{items[2].slice(3, 6)}</td>
                         </tr>
                       )
                     })
-                    }
+                  }
                 </tbody>
-              </table>
+              </Table>
+              { resultText === "No QR code found" ?
+                <div className='text-dark'>{resultText}</div> : ""
+              }
               {/* <button
                 className="post_btn"
                 onClick={handlePost}
